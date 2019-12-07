@@ -6,7 +6,7 @@ router.get('/screatezara', async (req, response) => {
   const sitemap = await axios.post(
       'https://api.webscraper.io/api/v1/sitemap?api_token=rozN4A44lCBCkcBLLP2C8vCrZs7An7EZsrrOS9eGDrUCAToBRxffs8zab2nS',
     {
-      _id: 'zara506505',
+      _id: 'zara',
       startUrl: ['https://www.zara.com/eg/en/'],
       selectors: [
         {
@@ -72,25 +72,25 @@ router.get('/screatezara', async (req, response) => {
 })
 
 
-// router.get('/screatelcwakiki', async (req, response) => {
-//   const sitemap = await axios.post(
-//       'https://api.webscraper.io/api/v1/sitemap?api_token=rozN4A44lCBCkcBLLP2C8vCrZs7An7EZsrrOS9eGDrUCAToBRxffs8zab2nS',
-//       {"_id":"lcwakiki","startUrl":["https://www.lcwaikiki.eg/en/"],"selectors":[{"id":"main_cat","type":"SelectorLink","parentSelectors":["_root"],"selector":"a.navigation__link","multiple":true,"delay":0},{"id":"product_name","type":"SelectorText","parentSelectors":["main_cat"],"selector":".product-name a","multiple":true,"regex":"","delay":0},{"id":"product_img","type":"SelectorImage","parentSelectors":["main_cat"],"selector":"img.product-item-image","multiple":true,"delay":0},{"id":"product_price","type":"SelectorText","parentSelectors":["main_cat"],"selector":"div:nth-of-type(n+4) span.product-sale-price","multiple":true,"regex":"","delay":0}]}
-//   )
-//   const job = await axios.post(
-//     'https://api.webscraper.io/api/v1/scraping-job?api_token=rozN4A44lCBCkcBLLP2C8vCrZs7An7EZsrrOS9eGDrUCAToBRxffs8zab2nS',
-//     {
-//       sitemap_id: sitemap.data.data.id,
-//       driver: 'fast', // "fast" or "fulljs"
-//       page_load_delay: 2000,
-//       request_interval: 2000,
-//       proxy: 0 // optional. 0 - no proxy, 1 - use proxy. Or proxy id for Scale plan users
-//     }
-//   )
+router.get('/screatelcwakiki', async (req, response) => {
+  const sitemap = await axios.post(
+      'https://api.webscraper.io/api/v1/sitemap?api_token=rozN4A44lCBCkcBLLP2C8vCrZs7An7EZsrrOS9eGDrUCAToBRxffs8zab2nS',
+      {"_id":"lcwakiki","startUrl":["https://www.lcwaikiki.eg/en/"],"selectors":[{"id":"main_cat","type":"SelectorLink","parentSelectors":["_root"],"selector":"a.navigation__link","multiple":true,"delay":0},{"id":"product_name","type":"SelectorText","parentSelectors":["main_cat"],"selector":".product-name a","multiple":true,"regex":"","delay":0},{"id":"product_img","type":"SelectorImage","parentSelectors":["main_cat"],"selector":"img.product-item-image","multiple":true,"delay":0},{"id":"product_price","type":"SelectorText","parentSelectors":["main_cat"],"selector":"div:nth-of-type(n+4) span.product-sale-price","multiple":true,"regex":"","delay":0}]}
+  )
+  const job = await axios.post(
+    'https://api.webscraper.io/api/v1/scraping-job?api_token=rozN4A44lCBCkcBLLP2C8vCrZs7An7EZsrrOS9eGDrUCAToBRxffs8zab2nS',
+    {
+      sitemap_id: sitemap.data.data.id,
+      driver: 'fast', // "fast" or "fulljs"
+      page_load_delay: 2000,
+      request_interval: 2000,
+      proxy: 0 // optional. 0 - no proxy, 1 - use proxy. Or proxy id for Scale plan users
+    }
+  )
 
-//   console.log(job.data)
-//   response.json(job.data)
-// })
+  console.log(job.data)
+  response.json(job.data)
+})
 
 
 // router.get('/screatepullansbear', async (req, response) => {
