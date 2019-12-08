@@ -78,7 +78,7 @@ router.get('/screatezara', async (req, response) => {
 router.get('/screatelcwakiki', async (req, response) => {
   const sitemap = await axios.post(
     'https://api.webscraper.io/api/v1/sitemap?api_token=' +
-      process.env.api_token,
+      process.env.api_token
     // {
     //   _id: 'lcw',
     //   startUrl: ['https://www.lcwaikiki.eg/en/'],
@@ -120,38 +120,6 @@ router.get('/screatelcwakiki', async (req, response) => {
     //     }
     //   ]
     // }
-    {
-      _id: 'lcc2', //bel pages bs el selectors msh mazboteen
-      startUrl: ['https://www.lcwaikiki.eg/en/c/women/?page=[2-30]'],
-      selectors: [
-        {
-          id: 'price',
-          type: 'SelectorText',
-          parentSelectors: ['_root'],
-          selector: 'div:nth-of-type(n+10) span',
-          multiple: true,
-          regex: '',
-          delay: 0
-        },
-        {
-          id: 'img',
-          type: 'SelectorImage',
-          parentSelectors: ['_root'],
-          selector: 'img.product-item-image',
-          multiple: true,
-          delay: 500
-        },
-        {
-          id: 'product_name',
-          type: 'SelectorText',
-          parentSelectors: ['_root'],
-          selector: 'div:nth-of-type(n+7) p',
-          multiple: true,
-          regex: '',
-          delay: 0
-        }
-      ]
-    }
   )
   const job = await axios.post(
     'https://api.webscraper.io/api/v1/scraping-job?api_token=' +
@@ -172,7 +140,7 @@ router.get('/screatelcwakiki', async (req, response) => {
 router.get('/screateamericaneagle', async (req, response) => {
   const sitemap = await axios.post(
     'https://api.webscraper.io/api/v1/sitemap?api_token=' +
-      process.env.api_token,
+      process.env.api_token
     // {
     //   _id: 'americaneagle',
     //   startUrl: ['https://www.ae.com/intl/en'],    //msh btraga3 el link
@@ -221,64 +189,6 @@ router.get('/screateamericaneagle', async (req, response) => {
     //     }
     //   ]
     // }
-    {
-      _id: 'american_eagle1', //taree2et seif lesa 3ayza tetgarab
-      startUrl: [
-        'https://www.ae.com/intl/en/?&mkwid=stpejEDOl_dc|pcrid|113447253256|pkw|american%20eagle%20egypt|pmt|p|slid||pgrid|9610252936|ptaid|kwd-62440276936|&cid=SRC_InternationalBrand_stpejEDOl&pgrid=9610252936&ptaid=kwd-62440276936&intent=&gclid=CjwKCAiAuK3vBRBOEiwA1IMhujoYbNVvx7H4YcKEg4MGfqStbig3O6_ggtWcRSdO3WzcqA-jJp9xXRoC2EIQAvD_BwE'
-      ],
-      selectors: [
-        {
-          id: 'main_category',
-          type: 'SelectorLink',
-          parentSelectors: ['_root'],
-          selector: 'a.top-level-link',
-          multiple: true,
-          delay: 0
-        },
-        {
-          id: 'sub_category',
-          type: 'SelectorLink',
-          parentSelectors: ['main_category'],
-          selector: '.cms-even-thirds-img-content a',
-          multiple: true,
-          delay: 0
-        },
-        {
-          id: 'product_img',
-          type: 'SelectorImage',
-          parentSelectors: ['sub_category'],
-          selector: 'img.product-tile-image-hover',
-          multiple: true,
-          delay: 0
-        },
-        {
-          id: 'product_name',
-          type: 'SelectorText',
-          parentSelectors: ['sub_category'],
-          selector: 'h3.product-name',
-          multiple: true,
-          regex: '',
-          delay: 0
-        },
-        {
-          id: 'product',
-          type: 'SelectorLink',
-          parentSelectors: ['sub_category'],
-          selector: 'img.product-tile-image-hover',
-          multiple: true,
-          delay: 10
-        },
-        {
-          id: 'product_price',
-          type: 'SelectorText',
-          parentSelectors: ['sub_category'],
-          selector: 'div.product-sale-price',
-          multiple: true,
-          regex: '',
-          delay: 0
-        }
-      ]
-    }
   )
   const job = await axios.post(
     'https://api.webscraper.io/api/v1/scraping-job?api_token=' +
@@ -302,7 +212,6 @@ router.get('/getdata', async (req, response) => {
       process.env.api_token
   )
   var result = []
-  // console.log(jobs.data.data)
   for (var i = 0; i < jobs.data.data.length; i++) {
     console.log(jobs.data.data[i].id)
     const sData = await axios.get(
@@ -332,7 +241,6 @@ async function getData() {
       process.env.api_token
   )
   var result = []
-  // console.log(jobs.data.data)
   for (var i = 0; i < jobs.data.data.length; i++) {
     console.log(jobs.data.data[i].id)
     const sData = await axios.get(
@@ -353,7 +261,6 @@ async function getData() {
       finalArray.push(JSON.parse(array[i]))
     }
   }
-  // console.log(finalArray)
   return finalArray
 }
 
@@ -381,7 +288,6 @@ async function filterGender(filter) {
       }
     }
   }
-  // console.log(gender)
   return result
 }
 router.post('/search', async (req, response) => {
@@ -407,17 +313,43 @@ router.post('/search', async (req, response) => {
   console.log('T-shirt'.includes('shirt'))
   response.json(result)
 })
-router.get('/getZara', async (req, response) => {
-  const data = await getData()
+
+async function search(keyWord, filter) {
+  var data = []
+  if (filter == '') {
+    data = await getData()
+  } else {
+    data = await filterGender(filter.toLowerCase())
+  }
   var result = []
   for (var i = 0; i < data.length; i++) {
-    console.log(data[i]['web-scraper-start-url'])
-    if (data[i]['web-scraper-start-url'] == 'https://www.zara.com/eg/en/') {
+    if (data[i].sub_category != undefined) {
+      if (data[i].sub_category.toLowerCase().includes(keyWord)) {
+        result.push(data[i])
+      }
+    }
+    if (data[i].product_name.toLowerCase().includes(keyWord)) {
       result.push(data[i])
+    }
+  }
+  return result
+}
+
+router.post('/sortByLocation', async (req, response) => {
+  const keyWord = req.body.keyWord
+  const filter = req.body.filter
+  const stores = req.body.stores
+  const data = await search(keyWord, filter)
+  var result = []
+  for (var i = 0; i < stores.length; i++) {
+    for (var j = 0; j < data.length; j++) {
+      if (data[j]['web-scraper-start-url'].includes(stores[i])) {
+        result.push(data[j])
+      }
     }
   }
   response.json(result)
 })
 
-//genders : MAN TRF KIDS Kids Women Men Baby Jeans
+//genders : MAN TRF KIDS Kids Women Men Baby
 module.exports = router
