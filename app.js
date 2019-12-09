@@ -2,7 +2,7 @@ const express = require('express')
 
 const app = express()
 app.use(express.json())
-const test = require('./routes/api/Test')
+const test = require('./routes/api/Products')
 app.use('/api/Test', test)
 
 app.use((req, res) => {
