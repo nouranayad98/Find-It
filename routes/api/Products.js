@@ -311,7 +311,7 @@ router.post('/search', async (req, response) => {
     }
   }
   console.log('T-shirt'.includes('shirt'))
-  response.json(result)
+  response.json({data:result})
 })
 
 async function search(keyWord, filter) {
