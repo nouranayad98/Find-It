@@ -25,7 +25,7 @@ router.get('/screatezara', async (req, response) => {
           type: 'SelectorLink',
           parentSelectors: ['main_category'],
           selector:
-            ".subcategory-menu--current .menu-item--level-2[data-layout='products-category-view'] > a",
+            '.subcategory-menu--current li.menu-item--level-2:nth-of-type(n+4) > a',
           multiple: true,
           delay: 0
         },
@@ -33,7 +33,7 @@ router.get('/screatezara', async (req, response) => {
           id: 'product',
           type: 'SelectorLink',
           parentSelectors: ['sub_category'],
-          selector: 'li:nth-of-type(n+13) a.name',
+          selector: "[data-colorcode='712'] div:nth-of-type(2) a",
           multiple: true,
           delay: 0
         },
@@ -78,48 +78,47 @@ router.get('/screatezara', async (req, response) => {
 router.get('/screatelcwakiki', async (req, response) => {
   const sitemap = await axios.post(
     'https://api.webscraper.io/api/v1/sitemap?api_token=' +
-      process.env.api_token
-    // {
-    //   _id: 'lcw',
-    //   startUrl: ['https://www.lcwaikiki.eg/en/'],
-    //   selectors: [
-    //     {
-    //       id: 'main_category',
-    //       type: 'SelectorLink',
-    //       parentSelectors: ['_root'],
-    //       selector: 'a.navigation__link',
-    //       multiple: true,
-    //       delay: 0
-    //     },
-    //     {
-    //       id: 'product',
-    //       type: 'SelectorLink',
-    //       parentSelectors: ['main_category'],
-    //       selector: '.product-name a',
-    //       multiple: true,
-    //       delay: 0
-    //     },
-
-    //     {
-    //       id: 'product_name',
-    //       type: 'SelectorText',
-    //       parentSelectors: ['product'],
-    //       selector: 'h1',
-    //       multiple: false,
-    //       regex: '',
-    //       delay: 0
-    //     },
-    //     {
-    //       id: 'product_price',
-    //       type: 'SelectorText',
-    //       parentSelectors: ['product'],
-    //       selector: 'div.product-detail__sale-price',
-    //       multiple: false,
-    //       regex: '',
-    //       delay: 0
-    //     }
-    //   ]
-    // }
+      process.env.api_token,
+    {
+      _id: 'lcw',
+      startUrl: ['https://www.lcwaikiki.eg/en/'],
+      selectors: [
+        {
+          id: 'main_category',
+          type: 'SelectorLink',
+          parentSelectors: ['_root'],
+          selector: 'a.navigation__link',
+          multiple: true,
+          delay: 0
+        },
+        {
+          id: 'product',
+          type: 'SelectorLink',
+          parentSelectors: ['main_category'],
+          selector: 'div:nth-of-type(n+4) .product-name a',
+          multiple: true,
+          delay: 0
+        },
+        {
+          id: 'product_name',
+          type: 'SelectorText',
+          parentSelectors: ['product'],
+          selector: 'h1',
+          multiple: false,
+          regex: '',
+          delay: 0
+        },
+        {
+          id: 'product_price',
+          type: 'SelectorText',
+          parentSelectors: ['product'],
+          selector: 'div.product-detail__sale-price',
+          multiple: false,
+          regex: '',
+          delay: 0
+        }
+      ]
+    }
   )
   const job = await axios.post(
     'https://api.webscraper.io/api/v1/scraping-job?api_token=' +
@@ -140,55 +139,55 @@ router.get('/screatelcwakiki', async (req, response) => {
 router.get('/screateamericaneagle', async (req, response) => {
   const sitemap = await axios.post(
     'https://api.webscraper.io/api/v1/sitemap?api_token=' +
-      process.env.api_token
-    // {
-    //   _id: 'americaneagle',
-    //   startUrl: ['https://www.ae.com/intl/en'],    //msh btraga3 el link
-    //   selectors: [
-    //     {
-    //       id: 'main_category',
-    //       type: 'SelectorLink',
-    //       parentSelectors: ['_root'],
-    //       selector: 'a.top-level-link',
-    //       multiple: true,
-    //       delay: 0
-    //     },
-    //     {
-    //       id: 'sub_category',
-    //       type: 'SelectorLink',
-    //       parentSelectors: ['main_category'],
-    //       selector: '.cms-even-thirds-img-content a',
-    //       multiple: true,
-    //       delay: 0
-    //     },
-    //     {
-    //       id: 'product',
-    //       type: 'SelectorLink',
-    //       parentSelectors: ['sub_category'],
-    //       selector: 'div:nth-of-type(n+6) a.xm-link-to',
-    //       multiple: true,
-    //       delay: 0
-    //     },
-    //     {
-    //       id: 'product_name',
-    //       type: 'SelectorText',
-    //       parentSelectors: ['product'],
-    //       selector: 'h1',
-    //       multiple: false,
-    //       regex: '',
-    //       delay: 0
-    //     },
-    //     {
-    //       id: 'product_price',
-    //       type: 'SelectorText',
-    //       parentSelectors: ['product'],
-    //       selector: 'div.product-sale-price',
-    //       multiple: false,
-    //       regex: '',
-    //       delay: 0
-    //     }
-    //   ]
-    // }
+      process.env.api_token,
+    {
+      _id: 'americaneagle',
+      startUrl: ['https://www.ae.com/intl/en'],
+      selectors: [
+        {
+          id: 'main_category',
+          type: 'SelectorLink',
+          parentSelectors: ['_root'],
+          selector: 'a.top-level-link',
+          multiple: true,
+          delay: 0
+        },
+        {
+          id: 'sub_category',
+          type: 'SelectorLink',
+          parentSelectors: ['main_category'],
+          selector: '.cms-even-thirds-img-content a',
+          multiple: true,
+          delay: 0
+        },
+        {
+          id: 'product',
+          type: 'SelectorLink',
+          parentSelectors: ['sub_category'],
+          selector: 'div:nth-of-type(n+17) a.tile-link',
+          multiple: true,
+          delay: 0
+        },
+        {
+          id: 'product_name',
+          type: 'SelectorText',
+          parentSelectors: ['product'],
+          selector: 'h1',
+          multiple: false,
+          regex: '',
+          delay: 0
+        },
+        {
+          id: 'product_price',
+          type: 'SelectorText',
+          parentSelectors: ['product'],
+          selector: 'div.product-sale-price',
+          multiple: false,
+          regex: '',
+          delay: 0
+        }
+      ]
+    }
   )
   const job = await axios.post(
     'https://api.webscraper.io/api/v1/scraping-job?api_token=' +
@@ -232,7 +231,7 @@ router.get('/getdata', async (req, response) => {
     }
   }
   console.log(result.length)
-  response.json(finalArray)
+  response.json({ data: finalArray })
 })
 
 async function getData() {
@@ -311,7 +310,7 @@ router.post('/search', async (req, response) => {
     }
   }
   console.log('T-shirt'.includes('shirt'))
-  response.json({data:result})
+  response.json({ data: result })
 })
 
 async function search(keyWord, filter) {
@@ -348,7 +347,7 @@ router.post('/sortByLocation', async (req, response) => {
       }
     }
   }
-  response.json(result)
+  response.json({ data: result })
 })
 
 //genders : MAN TRF KIDS Kids Women Men Baby
